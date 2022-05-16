@@ -9,7 +9,11 @@ const Schema = mongoose.Schema;
  * @constructor Users model constructor
  * @classdesc User have interesting properties. Some of them are isAdmin (false by default), isActive (true by default. Useful for removing login permission to the registered users), uuid (random and unique token. Created to provided a random identifier token for every user different than _id native MongoDB value)
  */
-const UsersSchema = new Schema({
+const RegisterSchema = new Schema({
+	username: {
+		type: String,
+		required: true,
+	},
 	email: {
 		type: String,
 		required: true,
@@ -52,7 +56,7 @@ const UsersSchema = new Schema({
 /**
  * Hash the password of user before save on database
  */
-UsersSchema.pre('save', function (next) {
+ RegisterSchema.pre('save', function (next) {
 	if (!this.isModified('password')) {
 		return next();
 	}
@@ -70,4 +74,4 @@ UsersSchema.pre('save', function (next) {
 	});
 });
 
-export { UsersSchema };
+export { RegisterSchema };

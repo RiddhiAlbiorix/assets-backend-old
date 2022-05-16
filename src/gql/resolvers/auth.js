@@ -17,8 +17,8 @@ export default {
 		/**
 		 * It allows to users to register as long as the limit of allowed users has not been reached
 		 */
-		registerUser: async (parent, { email, password }, context) => {
-			if (!email || !password) {
+		registerUser: async (parent, { username, email, password }, context) => {
+			if (!username || !email || !password) {
 				throw new UserInputError('Data provided is not valid');
 			}
 
@@ -40,12 +40,12 @@ export default {
 				throw new UserInputError('Data provided is not valid');
 			}
 
-			await new context.di.model.Users({ email, password }).save();
+			await new context.di.model.Users({ username, email, password }).save();
 
 			const user = await context.di.model.Users.findOne({ email });
 
 			return {
-				token: createAuthToken({ email: user.email, isAdmin: user.isAdmin, isActive: user.isActive, uuid: user.uuid }, securityVariablesConfig.secret, securityVariablesConfig.timeExpiration)
+				token: createAuthToken({ username: user.username, email: user.email, isAdmin: user.isAdmin, isActive: user.isActive, uuid: user.uuid }, securityVariablesConfig.secret, securityVariablesConfig.timeExpiration)
 			};
 		},
 		/**
@@ -77,7 +77,7 @@ export default {
 		/**
 		 * It allows to user to delete their account permanently (this action does not delete the records associated with the user, it only deletes their user account)
 		 */
-		deleteMyUserAccount:  async (parent, args, context) => {
+		deleteMyUserAccount: async (parent, args, context) => {
 			authValidations.ensureThatUserIsLogged(context);
 
 			const user = await authValidations.getUser(context);

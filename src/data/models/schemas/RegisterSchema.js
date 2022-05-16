@@ -12,7 +12,7 @@ const Schema = mongoose.Schema;
 const RegisterSchema = new Schema({
 	username: {
 		type: String,
-		required: true,
+		required: true
 	},
 	email: {
 		type: String,
@@ -56,7 +56,7 @@ const RegisterSchema = new Schema({
 /**
  * Hash the password of user before save on database
  */
- RegisterSchema.pre('save', function (next) {
+RegisterSchema.pre('save', function (next) {
 	if (!this.isModified('password')) {
 		return next();
 	}

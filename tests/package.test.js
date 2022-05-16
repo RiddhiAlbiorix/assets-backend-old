@@ -1,6 +1,6 @@
 import jsonfile from 'jsonfile';
 
-let packageJSONData; 
+let packageJSONData;
 
 describe('package.json file', () => {
 
@@ -13,16 +13,16 @@ describe('package.json file', () => {
 		if (packageJSONData.dependencies) {
 			const validPattern = /^(\d+\.)(\d+\.)(\d+)$/;
 			const regex = RegExp(validPattern);
-	
+
 			let allDependenciesAreFixed = true;
-			for (let key in packageJSONData.dependencies){
+			for (let key in packageJSONData.dependencies) {
 				if (Object.prototype.hasOwnProperty.call(packageJSONData.dependencies, key)) {
 					if (!regex.test(packageJSONData.dependencies[key])) {
 						allDependenciesAreFixed = false;
 					}
 				}
 			}
-	
+
 			expect(allDependenciesAreFixed).toBe(true);
 		}
 	});
@@ -34,7 +34,7 @@ describe('package.json file', () => {
 
 			let allDevDependenciesAreFixed = true;
 
-			for (let key in packageJSONData.devDependencies){
+			for (let key in packageJSONData.devDependencies) {
 				if (Object.prototype.hasOwnProperty.call(packageJSONData.devDependencies, key)) {
 					if (!regex.test(packageJSONData.devDependencies[key])) {
 						allDevDependenciesAreFixed = false;

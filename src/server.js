@@ -24,7 +24,8 @@ if (environmentVariablesConfig.formatConnection === 'DNSseedlist' && environment
 	mongoose.connect(environmentVariablesConfig.mongoDNSseedlist);
 } else {
 	if (environmentVariablesConfig.mongoUser !== '' && environmentVariablesConfig.mongoPass !== '') {
-		mongoose.connect(`mongodb://${environmentVariablesConfig.mongoUser}:${environmentVariablesConfig.mongoPass}@${environmentVariablesConfig.dbHost}:${environmentVariablesConfig.dbPort}/${environmentVariablesConfig.database}`);
+		//mongoose.connect(`mongodb://${environmentVariablesConfig.mongoUser}:${environmentVariablesConfig.mongoPass}@${environmentVariablesConfig.dbHost}:${environmentVariablesConfig.dbPort}/${environmentVariablesConfig.database}`);
+		mongoose.connect(`mongodb+srv://assets:albiorix@sh.ymut9.mongodb.net/assets_database`);
 	} else {
 		mongoose.connect(`mongodb://${environmentVariablesConfig.dbHost}:${environmentVariablesConfig.dbPort}/${environmentVariablesConfig.database}`);
 	}
@@ -90,8 +91,9 @@ const initApplication = async () => {
 	app.listen(environmentVariablesConfig.port, () => {
 		getListOfIPV4Address().forEach(ip => {
 			logger.info(`Application running on: http://${ip}:${environmentVariablesConfig.port}`);
-			if (environmentVariablesConfig.enviroment !== ENVIRONMENT.PRODUCTION) {
-				logger.info(`GraphQL Playground running on: http://${ip}:${environmentVariablesConfig.port}${server.graphqlPath}`);
+			if (environmentVariablesConfig.enviroment === ENVIRONMENT.PRODUCTION) {
+				//logger.info(`GraphQL Playground running on: http://${ip}:${environmentVariablesConfig.port}${server.graphqlPath}`);
+				logger.info(`GraphQL Playground running on: https://immense-woodland-60958.herokuapp.com${server.graphqlPath}`);
 			}
 		});
 	});

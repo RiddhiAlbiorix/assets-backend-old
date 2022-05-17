@@ -51,6 +51,7 @@ db.once('open', () => {
 });
 
 const initApplication = async () => {
+	console.log("AAA");
 	const app = express();
 	if (environmentVariablesConfig.enviroment === ENVIRONMENT.PRODUCTION) {
 		app.use(helmet());
@@ -68,6 +69,7 @@ const initApplication = async () => {
 	const server = new ApolloServer({ 
 		typeDefs,
 		resolvers,
+		introspection: environmentVariablesConfig.enviroment !== ENVIRONMENT.PRODUCTION,
 		context: setContext,
 		introspection: (environmentVariablesConfig.enviroment === ENVIRONMENT.PRODUCTION) ? false : true, // Set to "true" only in development mode
 		plugins: (environmentVariablesConfig.enviroment === ENVIRONMENT.PRODUCTION) ? [ApolloServerPluginLandingPageDisabled()] : [requestDevLogger, ApolloServerPluginLandingPageGraphQLPlayground()], // Log all querys and their responses. Show playground (do not use in production)
@@ -93,7 +95,7 @@ const initApplication = async () => {
 			logger.info(`Application running on: http://${ip}:${environmentVariablesConfig.port}`);
 			if (environmentVariablesConfig.enviroment === ENVIRONMENT.PRODUCTION) {
 				//logger.info(`GraphQL Playground running on: http://${ip}:${environmentVariablesConfig.port}${server.graphqlPath}`);
-				logger.info(`GraphQL Playground running on: https://immense-woodland-60958.herokuapp.com${server.graphqlPath}`);
+				logger.info(`GraphQL Playground running on: https://hidden-oasis-97398.herokuapp.com${server.graphqlPath}`);
 			}
 		});
 	});

@@ -1,3 +1,3 @@
-import { UsersSchema } from './UsersSchema.js';
+import { AuthSchema } from './AuthSchema.js';
 
-export { UsersSchema };
+export { AuthSchema };

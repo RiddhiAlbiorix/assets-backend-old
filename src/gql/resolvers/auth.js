@@ -51,7 +51,7 @@ export default {
 		/**
 		 * It allows users to authenticate. Users with property isActive with value false are not allowed to authenticate. When an user authenticates the value of lastLogin will be updated
 		 */
-		authUser: async (parent, { email, password }, context) => {
+		loginUser: async (parent, { email, password }, context) => {
 			if (!email || !password) {
 				throw new UserInputError('Invalid credentials');
 			}
@@ -74,15 +74,5 @@ export default {
 				token: createAuthToken({ email: user.email, isAdmin: user.isAdmin, isActive: user.isActive, uuid: user.uuid }, securityVariablesConfig.secret, securityVariablesConfig.timeExpiration)
 			};
 		},
-		/**
-		 * It allows to user to delete their account permanently (this action does not delete the records associated with the user, it only deletes their user account)
-		 */
-		deleteMyUserAccount: async (parent, args, context) => {
-			authValidations.ensureThatUserIsLogged(context);
-
-			const user = await authValidations.getUser(context);
-
-			return context.di.model.Users.deleteOne({ uuid: user.uuid });
-		}
 	}
 };

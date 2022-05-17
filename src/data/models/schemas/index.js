@@ -1,3 +1,3 @@
-import { RegisterSchema } from './RegisterSchema.js';
+import { AuthSchema } from './AuthSchema.js';
 
-export { RegisterSchema };
+export { AuthSchema };

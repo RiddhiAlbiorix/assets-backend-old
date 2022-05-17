@@ -10,7 +10,7 @@ export default /* GraphQL */ gql`
 		registerUser(username:String!, email: String!, password: String!): Token
 
 		""" It allows users to authenticate """
-		authUser(email: String!, password: String!): Token
+		loginUser(email: String!, password: String!): Token
 
 		""" It allows to user to delete their account permanently """
 		deleteMyUserAccount: DeleteResult

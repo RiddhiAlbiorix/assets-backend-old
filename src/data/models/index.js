@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-import { RegisterSchema } from './schemas/index.js';
+import { AuthSchema } from './schemas/index.js';
 
 export default {
-	Users: mongoose.model('users', RegisterSchema),
+	Users: mongoose.model('users', AuthSchema),
 };

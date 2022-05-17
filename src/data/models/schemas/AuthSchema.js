@@ -56,7 +56,7 @@ const AuthSchema = new Schema({
 /**
  * Hash the password of user before save on database
  */
- AuthSchema.pre('save', function (next) {
+AuthSchema.pre('save', function (next) {
 	if (!this.isModified('password')) {
 		return next();
 	}

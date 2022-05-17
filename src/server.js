@@ -69,7 +69,6 @@ const initApplication = async () => {
 	const server = new ApolloServer({ 
 		typeDefs,
 		resolvers,
-		introspection: environmentVariablesConfig.enviroment !== ENVIRONMENT.PRODUCTION,
 		context: setContext,
 		introspection: (environmentVariablesConfig.enviroment === ENVIRONMENT.PRODUCTION) ? false : true, // Set to "true" only in development mode
 		plugins: (environmentVariablesConfig.enviroment === ENVIRONMENT.PRODUCTION) ? [ApolloServerPluginLandingPageDisabled()] : [requestDevLogger, ApolloServerPluginLandingPageGraphQLPlayground()], // Log all querys and their responses. Show playground (do not use in production)

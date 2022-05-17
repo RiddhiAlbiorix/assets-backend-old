@@ -6,6 +6,7 @@ import { securityVariablesConfig } from '../../config/appConfig.js';
  * Create a new JSON Web Token
  * @param {Object} 		userData 			- Payload object
  * @param {string} 		userData.email 		- Payload data: User email
+ * @param {string} 		userData.username 		- Payload data: User name
  * @param {boolean} 	userData.isAdmin 	- Payload data: If user is admin or not
  * @param {boolean} 	userData.isActive 	- Payload data: If user is active or not
  * @param {string} 		userData.uuid 		- Payload data: An uuid token

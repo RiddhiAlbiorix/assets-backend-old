@@ -32,7 +32,8 @@ export const environmentVariablesConfig = Object.freeze({
 	mongoUser: process.env.MONGO_USER || '',
 	mongoPass: process.env.MONGO_PASS || '',
 	enviroment: (process.env.ENVIROMENT === ENVIRONMENT.DEVELOPMENT) ? ENVIRONMENT.DEVELOPMENT : ENVIRONMENT.PRODUCTION,
-	port: Number(process.env.PORT) || serverPortByDefault
+	port: Number(process.env.PORT) || serverPortByDefault,
+	DATABASE_URL: process.env.DATABASE_URL || 'mongodb+srv://assets:albiorix@sh.ymut9.mongodb.net/assets_database'
 });
 
 /**

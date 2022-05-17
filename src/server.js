@@ -21,13 +21,18 @@ import routesManager from './routes/routesManager.js';
 
 
 if (environmentVariablesConfig.formatConnection === 'DNSseedlist' && environmentVariablesConfig.mongoDNSseedlist !== '') {
+	console.log("1")
 	mongoose.connect(environmentVariablesConfig.mongoDNSseedlist);
 } else {
+	console.log("2")
 	if (environmentVariablesConfig.mongoUser !== '' && environmentVariablesConfig.mongoPass !== '') {
+		console.log("environmentVariablesConfig.DATABASE_URL", environmentVariablesConfig.DATABASE_URL);
 		//mongoose.connect(`mongodb://${environmentVariablesConfig.mongoUser}:${environmentVariablesConfig.mongoPass}@${environmentVariablesConfig.dbHost}:${environmentVariablesConfig.dbPort}/${environmentVariablesConfig.database}`);
-		mongoose.connect(`mongodb+srv://assets:albiorix@sh.ymut9.mongodb.net/assets_database`);
+		mongoose.connect(environmentVariablesConfig.DATABASE_URL);
 	} else {
-		mongoose.connect(`mongodb://${environmentVariablesConfig.dbHost}:${environmentVariablesConfig.dbPort}/${environmentVariablesConfig.database}`);
+		console.log("3")
+		//mongoose.connect(`mongodb://${environmentVariablesConfig.dbHost}:${environmentVariablesConfig.dbPort}/${environmentVariablesConfig.database}`);
+		mongoose.connect(environmentVariablesConfig.DATABASE_URL);
 	}
 }
 
@@ -51,7 +56,6 @@ db.once('open', () => {
 });
 
 const initApplication = async () => {
-	console.log("AAA");
 	const app = express();
 	if (environmentVariablesConfig.enviroment === ENVIRONMENT.PRODUCTION) {
 		app.use(helmet());
